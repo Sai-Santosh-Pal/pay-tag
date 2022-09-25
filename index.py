@@ -3,36 +3,6 @@ app = Flask(__name__)
 
 import scratchconnect
 
-
-@app.route('/history')
-def history():
-    file1 = open("myfile.txt","r+") 
-    return jsonify(file1.read())
-
-
-def add_history(typeOf, amount):
-    if typeOf == 1:
-        with open('history.txt', 'w') as f:
-            f.write(amount + "P credited to your account.")
-            f.write('\n')
-    if typeOf == 2:
-        with open('history.txt', 'w') as f:
-            f.write(amount + "P debited from your account.")
-            f.write('\n')
-    if typeOf == 3:
-        with open('history.txt', 'w') as f:
-            f.write(amount + "P debited from your account at a petrol station.")
-            f.write('\n')
-            
-
-
-    
-# user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
-# project = user.connect_project(project_id=733246147)
-# variables = project.connect_cloud_variables()
-# variables.get_variable_data(limit=100, offset=0)  # Returns the cloud variable data
-# balance = variables.get_cloud_variable_value(variable_name="balance", limit=100)
-# balances = balance[0]
 @app.route('/')
 def balance():
     user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
@@ -47,12 +17,6 @@ def balance():
 
 @app.route('/add_balance/<int:amount>/')
 def add_balance(amount):
-    # user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
-    # project = user.connect_project(project_id=733246147)
-    # variables = project.connect_cloud_variables()
-    # variables.get_variable_data(limit=100, offset=0)  # Returns the cloud variable data
-    # balance = variables.get_cloud_variable_value(variable_name="balance", limit=100)
-    # balances = balance[0]
     user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
     project = user.connect_project(project_id=733246147)
     variables = project.connect_cloud_variables()
@@ -64,17 +28,10 @@ def add_balance(amount):
     balance_dict = {
         "balance": balancese[0]
     }
-    add_history(1, amount)
     return jsonify(balance_dict) 
 
 @app.route('/sub_balance/<int:amount>/')
 def sub_balance(amount):
-    # user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
-    # project = user.connect_project(project_id=733246147)
-    # variables = project.connect_cloud_variables()
-    # variables.get_variable_data(limit=100, offset=0)  # Returns the cloud variable data
-    # balance = variables.get_cloud_variable_value(variable_name="balance", limit=100)
-    # balances = balance[0]
     user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
     project = user.connect_project(project_id=733246147)
     variables = project.connect_cloud_variables()
@@ -86,18 +43,11 @@ def sub_balance(amount):
     balance_dict = {
         "balance": balancese[0]
     }
-    add_history(2, amount)
     return jsonify(balance_dict)
 
 
 @app.route('/sub_balance_petrol/<int:amount>/')
 def sub_balance_petrol(amount):
-    # user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
-    # project = user.connect_project(project_id=733246147)
-    # variables = project.connect_cloud_variables()
-    # variables.get_variable_data(limit=100, offset=0)  # Returns the cloud variable data
-    # balance = variables.get_cloud_variable_value(variable_name="balance", limit=100)
-    # balances = balance[0]
     try:
         user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
         project = user.connect_project(project_id=733246147)
@@ -110,7 +60,6 @@ def sub_balance_petrol(amount):
         message = {
         "msg": f"Successfull paid {amount}P!"
         }
-        add_history(3, amount)
         return jsonify(message)
         
     except Exception:
