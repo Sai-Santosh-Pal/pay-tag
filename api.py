@@ -13,7 +13,7 @@ import scratchconnect
 # variables.get_variable_data(limit=100, offset=0)  # Returns the cloud variable data
 # balance = variables.get_cloud_variable_value(variable_name="balance", limit=100)
 # balances = balance[0]
-@app.route('/balance/')
+@app.route('/')
 def balance():
     user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
     project = user.connect_project(project_id=733246147)
