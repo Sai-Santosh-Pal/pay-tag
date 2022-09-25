@@ -4,6 +4,26 @@ app = Flask(__name__)
 import scratchconnect
 
 
+@app.route('/history')
+def history():
+    file1 = open("myfile.txt","r+") 
+    return jsonify(file1.read())
+
+
+def add_history(typeOf, amount):
+    if typeOf == 1:
+        with open('history.txt', 'w') as f:
+            f.write(amount + "P credited to your account.")
+            f.write('\n')
+    if typeOf == 2:
+        with open('history.txt', 'w') as f:
+            f.write(amount + "P debited from your account.")
+            f.write('\n')
+    if typeOf == 3:
+        with open('history.txt', 'w') as f:
+            f.write(amount + "P debited from your account at a petrol station.")
+            f.write('\n')
+            
 
 
     
@@ -44,6 +64,7 @@ def add_balance(amount):
     balance_dict = {
         "balance": balancese[0]
     }
+    add_history(1, amount)
     return jsonify(balance_dict) 
 
 @app.route('/sub_balance/<int:amount>/')
@@ -65,6 +86,7 @@ def sub_balance(amount):
     balance_dict = {
         "balance": balancese[0]
     }
+    add_history(2, amount)
     return jsonify(balance_dict)
 
 
@@ -88,8 +110,9 @@ def sub_balance_petrol(amount):
         message = {
         "msg": f"Successfull paid {amount}P!"
         }
+        add_history(3, amount)
         return jsonify(message)
-
+        
     except Exception:
         message = {
         "msg": "Transaction failed"
