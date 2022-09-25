@@ -1,0 +1,13 @@
+{
+    "name":"PayTag API",
+    "version": 2,
+    "builds": [
+        {
+            "src": "*py", 
+            "use": "@liudonghual123/now-flask"
+        }
+    ],
+    "routes": [
+        {"src": "(.*)","dest":"app.py"}
+    ]
+}
