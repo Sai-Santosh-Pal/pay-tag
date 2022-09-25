@@ -25,7 +25,7 @@ def balance():
     }
     return jsonify(balance_dict) 
 
-@app.route(f'/add_balance/<int:amount>/')
+@app.route('/add_balance/<int:amount>/')
 def add_balance(amount):
     # user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
     # project = user.connect_project(project_id=733246147)
@@ -46,7 +46,7 @@ def add_balance(amount):
     }
     return jsonify(balance_dict) 
 
-@app.route(f'/sub_balance/<int:amount>/')
+@app.route('/sub_balance/<int:amount>/')
 def sub_balance(amount):
     # user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
     # project = user.connect_project(project_id=733246147)
@@ -68,7 +68,7 @@ def sub_balance(amount):
     return jsonify(balance_dict)
 
 
-@app.route(f'/sub_balance_petrol/<int:amount>/')
+@app.route('/sub_balance_petrol/<int:amount>/')
 def sub_balance_petrol(amount):
     # user = scratchconnect.ScratchConnect("SaiSantoshPal", "sai2010**")
     # project = user.connect_project(project_id=733246147)
