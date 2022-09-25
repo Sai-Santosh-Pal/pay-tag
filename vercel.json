@@ -4,7 +4,7 @@
     "builds": [
         {
             "src": "*py", 
-            "use": "@liudonghual123/now-flask"
+            "use": "@vercel/python"
         }
     ],
     "routes": [
