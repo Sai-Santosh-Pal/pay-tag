@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 app = Flask(__name__)
 
 import scratchconnect
@@ -39,7 +39,10 @@ def add_balance(amount):
     set = variables.set_cloud_variable(variable_name="balance", value=amount + int(balancese[0]))
     balancese = variables.get_cloud_variable_value(variable_name="balance", limit=100) 
     # write_history(typeOf="add", add=amount)
-    return balancese[0]
+    balance_dict = {
+        "balance": balancese[0]
+    }
+    return jsonify(balance_dict) 
 
 @app.route(f'/sub_balance/<int:amount>/')
 def sub_balance(amount):
@@ -57,7 +60,11 @@ def sub_balance(amount):
     set = variables.set_cloud_variable(variable_name="balance", value=int(balancese[0])-amount)
     balancese = variables.get_cloud_variable_value(variable_name="balance", limit=100) 
     # write_history(typeOf="sub", sub=amount)
-    return balancese[0]
+    balance_dict = {
+        "balance": balancese[0]
+    }
+    return jsonify(balance_dict)
+
 
 @app.route(f'/sub_balance_petrol/<int:amount>/')
 def sub_balance_petrol(amount):
@@ -76,9 +83,16 @@ def sub_balance_petrol(amount):
         set = variables.set_cloud_variable(variable_name="balance", value=int(balancese[0])-amount)
         balancese = variables.get_cloud_variable_value(variable_name="balance", limit=100) 
         # write_history(typeOf="subp", sub=amount)
-        return f"Successfull paid {amount}P!"
+        message = {
+        "msg": f"Successfull paid {amount}P!"
+        }
+        return jsonify(message)
+
     except Exception:
-        return "Transaction failed"
+        message = {
+        "msg": "Transaction failed"
+        }
+        return jsonify(message)
 
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0')
