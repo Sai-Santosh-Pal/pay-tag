@@ -71,7 +71,6 @@
 # if __name__ == "__main__":
 #     app.run(debug=False, host='0.0.0.0')
 
-
 import flask
 import csv
  
@@ -79,12 +78,12 @@ app = flask.Flask(__name__)
  
 def checkForUser(email):
     with open('users.csv', mode ='r') as file:
-        csvFile = csv.reader(file) 
+        csvFile = csv.reader(file)
         for lines in csvFile:
             if lines[0] == email:
                 return "found"
             else:
-                return "not found"
+                return "not found" 
    
  
 # Sign In
