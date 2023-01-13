@@ -84,7 +84,7 @@ def checkForUser(email):
             if lines[0] == email:
                 return "found"
             else:
-                return "not found" + 
+                return "not found"
    
  
 # Sign In
